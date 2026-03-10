@@ -12,6 +12,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { testimonials } from "@/lib/data";
 import SectionTitle from "@/components/SectionTitle";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -118,12 +119,23 @@ export default function Testimonials() {
 
               {/* Author info */}
               <div className="flex items-center gap-3 pt-4 border-t border-card-border/50">
-                <div className="w-10 h-10 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-sm font-bold text-primary">
-                  {testimonial.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
-                </div>
+                {testimonial.image ? (
+                  <Image
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    width={40}
+                    height={40}
+                    className="w-10 h-10 rounded-full object-cover border border-primary/30"
+                    unoptimized
+                  />
+                ) : (
+                  <div className="w-10 h-10 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-sm font-bold text-primary">
+                    {testimonial.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
+                  </div>
+                )}
                 <div>
                   <p className="text-sm font-semibold">{testimonial.name}</p>
                   <p className="text-xs text-muted">

@@ -16,17 +16,23 @@ import gsap from "gsap";
 import MagneticButton from "@/components/MagneticButton";
 import { stats } from "@/lib/data";
 
+const CYCLE_WORDS = ["WEBSITES", "WEB APPS", "MOBILE APPS", "SAAS TOOLS", "E-COMMERCE", "EXPERIENCES"];
+
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const headlineRef = useRef<HTMLDivElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
-  const blobRef = useRef<HTMLDivElement>(null);
+  const sectionRef    = useRef<HTMLElement>(null);
+  const headlineRef   = useRef<HTMLDivElement>(null);
+  const subtitleRef   = useRef<HTMLParagraphElement>(null);
+  const ctaRef        = useRef<HTMLDivElement>(null);
+  const statsRef      = useRef<HTMLDivElement>(null);
+  const videoWrapRef  = useRef<HTMLDivElement>(null);
+  const videoRef      = useRef<HTMLVideoElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
-  const badgeRef = useRef<HTMLDivElement>(null);
+  const badgeRef      = useRef<HTMLDivElement>(null);
+  const cycleRef      = useRef<HTMLSpanElement>(null);
+  const cycleIdxRef   = useRef(0);
 
   useEffect(() => {
+    let intervalId: ReturnType<typeof setInterval> | undefined;
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.3 });
 
@@ -100,11 +106,11 @@ export default function Hero() {
         );
       });
 
-      // 6. 3D blob morphs in
+      // 6. Video panel slides in
       tl.fromTo(
-        blobRef.current,
-        { scale: 0, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1.4, ease: "elastic.out(1, 0.4)" },
+        videoWrapRef.current,
+        { x: 60, opacity: 0, scale: 0.92 },
+        { x: 0, opacity: 1, scale: 1, duration: 1.2, ease: "power3.out" },
         "-=2"
       );
 
@@ -116,52 +122,29 @@ export default function Hero() {
         "-=0.3"
       );
 
-      // ====== BLOB ORGANIC ANIMATIONS ======
-      gsap.to(blobRef.current, {
-        y: -20,
-        duration: 5,
+      // ====== VIDEO FLOAT ANIMATION ======
+      gsap.to(videoWrapRef.current, {
+        y: -12,
+        duration: 4,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
       });
 
-      gsap.to(".blob-piece-1", {
-        borderRadius: "42% 58% 70% 30% / 45% 45% 55% 55%",
-        rotate: 10,
-        duration: 6,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-
-      gsap.to(".blob-piece-2", {
-        borderRadius: "50% 50% 35% 65% / 60% 40% 60% 40%",
-        rotate: -8,
-        scale: 1.03,
-        duration: 7,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-
-      gsap.to(".blob-piece-3", {
-        borderRadius: "55% 45% 40% 60% / 35% 65% 35% 65%",
-        rotate: 12,
-        duration: 8,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-
-      gsap.to(".blob-piece-4", {
-        borderRadius: "38% 62% 55% 45% / 50% 50% 50% 50%",
-        rotate: -6,
-        scale: 0.97,
-        duration: 5.5,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
+      // ====== CYCLING HEADLINE WORD ======
+      const cycleTick = () => {
+        const el = cycleRef.current;
+        if (!el) return;
+        cycleIdxRef.current = (cycleIdxRef.current + 1) % CYCLE_WORDS.length;
+        gsap.timeline()
+          .to(el, { yPercent: -110, opacity: 0, duration: 0.35, ease: "power2.in" })
+          .call(() => { el.textContent = CYCLE_WORDS[cycleIdxRef.current]; })
+          .fromTo(el,
+            { yPercent: 110, opacity: 0 },
+            { yPercent: 0, opacity: 1, duration: 0.45, ease: "power2.out" }
+          );
+      };
+      intervalId = setInterval(cycleTick, 2400);
 
       // Availability badge pulse
       gsap.to(".availability-dot", {
@@ -183,30 +166,18 @@ export default function Hero() {
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      clearInterval(intervalId);
+    };
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center section-padding pt-20 overflow-hidden"
+      className="relative flex flex-col section-padding pt-20 pb-10 lg:pt-28 lg:pb-20 lg:min-h-screen overflow-hidden gap-0"
       id="hero"
     >
-      {/* SVG gooey filter for blob */}
-      <svg className="absolute w-0 h-0" aria-hidden="true">
-        <defs>
-          <filter id="gooey">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
-            <feColorMatrix
-              in="blur"
-              mode="matrix"
-              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8"
-              result="gooey"
-            />
-            <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
-          </filter>
-        </defs>
-      </svg>
 
       {/* Background glow layers */}
       <div
@@ -231,7 +202,8 @@ export default function Hero() {
         }}
       />
 
-      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="w-full flex flex-col">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 lg:items-start">
         {/* ====== LEFT: Text Content ====== */}
         <div className="relative z-10">
           {/* Availability Badge — green pulsing dot */}
@@ -254,16 +226,28 @@ export default function Hero() {
             className="mb-6 md:mb-8"
             style={{ perspective: "600px" }}
           >
-            {["I BUILD", "WEBSITES", "THAT GROW", "YOUR", "BUSINESS"].map((word, i) => (
+            {["I BUILD", null, "THAT GROW", "YOUR", "BUSINESS"].map((word, i) => (
               <div key={i} className="overflow-hidden">
-                <span
-                  className={`hero-line block font-black tracking-tighter leading-[0.9] text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] ${
-                    word === "YOUR" || word === "BUSINESS" ? "text-gradient" : ""
-                  }`}
-                  style={{ transformOrigin: "bottom left" }}
-                >
-                  {word}
-                </span>
+                {word === null ? (
+                  /* Cycling animated word */
+                  <span
+                    className="hero-line block font-black tracking-tighter leading-[0.9] text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] overflow-hidden"
+                    style={{ transformOrigin: "bottom left" }}
+                  >
+                    <span ref={cycleRef} className="inline-block text-primary">
+                      WEBSITES
+                    </span>
+                  </span>
+                ) : (
+                  <span
+                    className={`hero-line block font-black tracking-tighter leading-[0.9] text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] ${
+                      word === "YOUR" || word === "BUSINESS" ? "text-gradient" : ""
+                    }`}
+                    style={{ transformOrigin: "bottom left" }}
+                  >
+                    {word}
+                  </span>
+                )}
               </div>
             ))}
           </div>
@@ -279,7 +263,7 @@ export default function Hero() {
           </p>
 
           {/* Dual CTA — Primary action + Secondary */}
-          <div ref={ctaRef} className="flex flex-wrap items-center gap-4 mb-12">
+          <div ref={ctaRef} className="flex flex-wrap items-center gap-4">
             <MagneticButton
               as="a"
               href="#contact"
@@ -307,131 +291,107 @@ export default function Hero() {
             </MagneticButton>
           </div>
 
-          {/* Quick Stats Row — social proof above the fold */}
-          <div ref={statsRef} className="flex flex-wrap gap-8 lg:gap-10">
-            {stats.map((stat, i) => (
-              <div key={i} className="stat-item">
-                <div className="flex items-baseline gap-0.5">
-                  <span
-                    className="hero-stat-number text-3xl md:text-4xl font-black text-foreground"
-                    data-value={stat.value}
-                  >
-                    0
-                  </span>
-                  <span className="text-2xl md:text-3xl font-bold text-primary">
-                    {stat.suffix}
-                  </span>
-                </div>
-                <p className="text-xs text-muted mt-1 uppercase tracking-wider">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
 
-        {/* ====== RIGHT: Organic 3D Liquid Blob ====== */}
-        <div className="relative flex items-center justify-center lg:justify-end">
-          <div
-            ref={blobRef}
-            className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-[24rem] md:h-[24rem] lg:w-[28rem] lg:h-[28rem]"
-          >
-            {/* Outer halo glow */}
-            <div
-              className="absolute -inset-20 pointer-events-none"
-              style={{
-                background: "radial-gradient(circle at 50% 50%, rgba(124,58,237,0.35) 0%, rgba(99,102,241,0.15) 35%, transparent 65%)",
-                filter: "blur(60px)",
-              }}
-            />
+        {/* ====== RIGHT: Intro video ====== */}
+        <div className="relative flex items-center justify-center lg:justify-end lg:pt-8">
 
-            {/* Gooey blob container */}
-            <div className="absolute inset-0" style={{ filter: "url(#gooey)" }}>
-              <div
-                className="blob-piece-1 absolute"
-                style={{
-                  top: "5%", left: "5%", width: "90%", height: "90%",
-                  borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
-                  background: "linear-gradient(135deg, #7c3aed 0%, #6d28d9 30%, #4c1d95 60%, #312e81 100%)",
-                }}
-              />
-              <div
-                className="blob-piece-2 absolute"
-                style={{
-                  top: "-2%", right: "-2%", width: "70%", height: "65%",
-                  borderRadius: "40% 60% 55% 45% / 55% 35% 65% 45%",
-                  background: "linear-gradient(160deg, #6366f1 0%, #4f46e5 40%, #4c1d95 80%)",
-                }}
-              />
-              <div
-                className="blob-piece-3 absolute"
-                style={{
-                  bottom: "-4%", left: "-3%", width: "65%", height: "60%",
-                  borderRadius: "45% 55% 50% 50% / 40% 60% 40% 60%",
-                  background: "linear-gradient(200deg, #7c3aed 0%, #581c87 50%, #3b0764 100%)",
-                }}
-              />
-              <div
-                className="blob-piece-4 absolute"
-                style={{
-                  top: "25%", right: "-5%", width: "50%", height: "55%",
-                  borderRadius: "55% 45% 35% 65% / 50% 50% 50% 50%",
-                  background: "linear-gradient(180deg, #4f46e5 0%, #3730a3 60%, #1e1b4b 100%)",
-                }}
-              />
-              <div
-                className="absolute"
-                style={{
-                  top: "-6%", left: "20%", width: "55%", height: "45%",
-                  borderRadius: "50% 50% 40% 60% / 45% 55% 45% 55%",
-                  background: "linear-gradient(140deg, #8b5cf6 0%, #6d28d9 50%, #4c1d95 100%)",
-                }}
-              />
+          {/* Outer glow */}
+          <div
+            className="absolute -inset-16 pointer-events-none"
+            style={{
+              background: "radial-gradient(circle at 50% 50%, rgba(124,58,237,0.28) 0%, rgba(99,102,241,0.10) 40%, transparent 70%)",
+              filter: "blur(70px)",
+            }}
+          />
+
+          <div
+            ref={videoWrapRef}
+            className="relative w-52 sm:w-64 md:w-72 lg:w-[22rem] xl:w-96"
+          >
+            {/* Device-style frame */}
+            <div
+              className="relative rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl shadow-primary/20"
+              style={{ aspectRatio: "3/4" }}
+            >
+              {/* Sheen overlay */}
+              <div className="absolute inset-0 z-10 pointer-events-none" style={{
+                background: "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 40%, rgba(0,0,0,0.25) 100%)"
+              }} />
+
+              <video
+                ref={videoRef}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                className="w-full h-full object-cover"
+                onCanPlay={(e) => (e.currentTarget as HTMLVideoElement).play().catch(() => {})}
+              >
+                <source
+                  src="https://res.cloudinary.com/dtpz8iptk/video/upload/vc_vp9,ac_none/v1773092564/2_vvw4h7.webm"
+                  type="video/webm; codecs=vp9"
+                />
+                <source
+                  src="https://res.cloudinary.com/dtpz8iptk/video/upload/vc_h264,ac_none/v1773092564/2_vvw4h7.mp4"
+                  type="video/mp4; codecs=avc1.42E01E"
+                />
+              </video>
             </div>
 
-            {/* Lighting layers */}
-            <div
-              className="absolute inset-[12%] pointer-events-none"
-              style={{
-                borderRadius: "50% 50% 45% 55% / 55% 45% 55% 45%",
-                background: "radial-gradient(ellipse at 40% 35%, #a855f7 0%, #8b5cf6 25%, #6d28d9 50%, transparent 75%)",
-                filter: "blur(8px)",
-                opacity: 0.7,
-              }}
-            />
-            <div
-              className="absolute pointer-events-none"
-              style={{
-                top: "12%", left: "18%", width: "38%", height: "32%",
-                borderRadius: "50%",
-                background: "radial-gradient(ellipse at 45% 40%, rgba(255,255,255,0.55) 0%, rgba(221,214,254,0.25) 30%, rgba(167,139,250,0.10) 55%, transparent 75%)",
-                filter: "blur(6px)",
-              }}
-            />
-            <div
-              className="absolute pointer-events-none"
-              style={{
-                top: "20%", left: "28%", width: "14%", height: "10%",
-                borderRadius: "50%",
-                background: "radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%)",
-                filter: "blur(4px)",
-              }}
-            />
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                borderRadius: "50%",
-                background: "radial-gradient(ellipse at 75% 75%, rgba(15,10,40,0.6) 0%, transparent 50%)",
-              }}
-            />
+            {/* Floating badge — hackathon */}
+            <div className="absolute -bottom-3 left-2 lg:-bottom-4 lg:-left-4 z-20 flex items-center gap-2 px-3 py-1.5 lg:px-3.5 lg:py-2 rounded-2xl bg-card border border-yellow-500/30 shadow-xl backdrop-blur-sm">
+              <span className="text-base lg:text-xl">🏆</span>
+              <div>
+                <p className="text-[9px] lg:text-[10px] font-bold text-yellow-400 uppercase tracking-wider">Google Cloud</p>
+                <p className="text-[9px] lg:text-[10px] text-white/60">3rd Runner Up</p>
+              </div>
+            </div>
+
+            {/* Floating badge — available */}
+            <div className="absolute -top-3 right-2 lg:-top-4 lg:-right-4 z-20 flex items-center gap-1.5 px-2.5 py-1.5 lg:gap-2 lg:px-3 lg:py-2 rounded-2xl bg-card border border-emerald-500/30 shadow-xl backdrop-blur-sm">
+              <span className="relative flex h-1.5 w-1.5 lg:h-2 lg:w-2">
+                <span className="animate-ping absolute inset-0 rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 lg:h-2 lg:w-2 bg-emerald-500" />
+              </span>
+              <p className="text-[9px] lg:text-[10px] font-medium text-emerald-400">Open to work</p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Stats — full width, centered below grid */}
+      <div
+        ref={statsRef}
+        className="w-full flex flex-wrap justify-center gap-8 lg:gap-16 pt-8 lg:pt-10 mt-8 lg:mt-6 border-t border-white/5"
+      >
+        {stats.map((stat, i) => (
+          <div key={i} className="stat-item text-center">
+            <div className="flex items-baseline gap-0.5 justify-center">
+              <span
+                className="hero-stat-number text-3xl sm:text-4xl lg:text-5xl font-black text-foreground"
+                data-value={stat.value}
+              >
+                0
+              </span>
+              <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary">
+                {stat.suffix}
+              </span>
+            </div>
+            <p className="text-[10px] sm:text-xs text-muted mt-1 uppercase tracking-wider whitespace-nowrap">
+              {stat.label}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      </div>{/* end outer column wrapper */}
+
+      {/* Scroll indicator — desktop only */}
       <div
         ref={scrollIndicatorRef}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
       >
         <span className="text-xs text-muted tracking-widest uppercase">
           Scroll

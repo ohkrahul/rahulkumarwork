@@ -42,11 +42,11 @@ export default function Home() {
       {/* Process: How easy it is to work with me */}
       <Process />
 
-      {/* Testimonials: Client results & social proof */}
-      <Testimonials />
-
       {/* Achievements: Hackathon wins & recognition */}
       <Achievements />
+
+      {/* Testimonials: Client results & social proof */}
+      <Testimonials />
 
       {/* FAQ: Remove hiring objections */}
       <FAQ />

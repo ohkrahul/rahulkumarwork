@@ -105,6 +105,7 @@ export interface Testimonial {
   text: string;
   rating: number;
   avatar?: string;
+  image?: string;
 }
 
 export const testimonials: Testimonial[] = [
@@ -115,6 +116,7 @@ export const testimonials: Testimonial[] = [
     company: "TechCorp",
     text: "Rahul transformed our outdated web app into a blazing-fast Next.js platform. Our page load times dropped by 70% and user engagement shot up. His attention to detail and clean code made the handoff seamless.",
     rating: 5,
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
   },
   {
     id: 2,
@@ -123,6 +125,7 @@ export const testimonials: Testimonial[] = [
     company: "StartupXYZ",
     text: "We hired Rahul for a 3-week sprint and he delivered a full MVP with AI integration ahead of schedule. His communication was excellent — daily updates, no surprises. We've already booked him for our next project.",
     rating: 5,
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
   },
   {
     id: 3,
@@ -131,6 +134,7 @@ export const testimonials: Testimonial[] = [
     company: "CreativeStudio",
     text: "As a designer, I'm very particular about implementation fidelity. Rahul nailed every animation, every micro-interaction, pixel-perfect. Working with him felt like having a design partner, not just a developer.",
     rating: 5,
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
   },
   {
     id: 4,
@@ -139,6 +143,7 @@ export const testimonials: Testimonial[] = [
     company: "DigitalFirst",
     text: "Rahul built our entire e-commerce platform from scratch. Sales increased 35% in the first month after launch. He's not just a skilled developer — he genuinely cares about the business impact of his work.",
     rating: 5,
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
   },
 ];
 
