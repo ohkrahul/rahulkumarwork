@@ -81,7 +81,7 @@ export default function Navigation() {
         <div className="section-padding flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a
-            href="#"
+            href="/"
             className="text-lg md:text-xl font-bold tracking-tight"
             data-cursor-hover
           >

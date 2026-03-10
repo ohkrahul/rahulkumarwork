@@ -306,19 +306,33 @@ export default function ProjectPage() {
       {/* Gallery / Mockups Section */}
       <section className="section-padding py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {[1, 2, 3].map((i) => (
+          {(project.images ?? []).map((src, i) => (
+            <div
+              key={i}
+              className={`gallery-image rounded-2xl overflow-hidden border border-white/5 ${
+                i === 0 ? "md:col-span-2" : ""
+              }`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={src}
+                alt={`${project.title} screenshot ${i + 1}`}
+                className="w-full h-full object-cover object-top"
+                loading="lazy"
+              />
+            </div>
+          ))}
+          {/* Fallback placeholder if no images */}
+          {!project.images?.length && [1, 2, 3].map((i) => (
             <div
               key={i}
               className={`gallery-image rounded-2xl overflow-hidden ${
                 i === 1 ? "md:col-span-2 h-64 md:h-96" : "h-48 md:h-64"
               }`}
               style={{
-                background: `linear-gradient(${
-                  135 + i * 30
-                }deg, ${project.color}22, ${project.color}08, #141414)`,
+                background: `linear-gradient(${135 + i * 30}deg, ${project.color}22, ${project.color}08, #141414)`,
               }}
             >
-              {/* Placeholder - replace with actual project screenshots */}
               <div className="w-full h-full flex items-center justify-center text-muted/30 text-sm">
                 Project Screenshot {i}
               </div>

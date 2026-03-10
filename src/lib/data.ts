@@ -13,6 +13,7 @@ export interface Project {
   longDescription: string;
   tech: string[];
   image: string;
+  images?: string[];
   color: string;
   year: string;
   role: string;
@@ -32,11 +33,16 @@ export const projects: Project[] = [
       "Food delivery platform with real-time menu/order updates, admin panel, and smooth animations.",
     longDescription:
       "Built a full-featured food delivery platform from scratch. Features include real-time menu and order synchronization via Firebase, a complete admin panel for inventory and order management, Framer Motion-powered animations throughout the UI, a dynamic cart and checkout system, and a responsive, SEO-friendly interface. My first freelance project that established my approach to client work.",
-    tech: ["React.js", "Redux", "Firebase", "Framer Motion", "CSS3"],
+    tech: ["React.js", "Redux", "Firebase", "Framer Motion", "CSS3","Tailwind CSS","Vercel","Real-time Database","Admin Panel","E-Commerce","SEO","Responsive Design","Git","GitHub","Client Collaboration","Project Management"],
     image: "/projects/foodie-zone.jpg",
+    images: [
+      "https://res.cloudinary.com/dtpz8iptk/image/upload/v1773163383/Screenshot_2026-03-10_223830_h0zoeo.png",
+      "https://res.cloudinary.com/dtpz8iptk/image/upload/v1773163383/Screenshot_2026-03-10_224047_pursmi.png",
+      "https://res.cloudinary.com/dtpz8iptk/image/upload/v1773163382/Screenshot_2026-03-10_223910_xw6iae.png",
+    ],
     color: "#f97316",
     year: "2025",
-    role: "Full-Stack Developer",
+    role: "Full Stack Developer",
     client: "Freelance Client",
     result: "Live platform with real-time order management",
     link: "https://thefooddelivery.vercel.app/",
@@ -45,16 +51,21 @@ export const projects: Project[] = [
     id: 2,
     slug: "expatlives",
     title: "EXPATLIVES",
-    subtitle: "HTML / CSS / JavaScript / Vercel",
+    subtitle: "React.js / CSS3 / JavaScript / Vercel",
     description:
       "Multi-page static website with modular components, mobile-first styling, and SEO-friendly structure.",
     longDescription:
       "Designed and developed a multi-page static website with componentized HTML sections, mobile-first responsive CSS, semantic markup with proper meta tags for SEO, and deployed on Vercel for blazing-fast global delivery. Built with clean, maintainable code that the client can easily extend.",
-    tech: ["HTML5", "CSS3", "JavaScript", "Vercel"],
+    tech: ["React.js", "CSS3", "JavaScript", "Vercel", "SEO", "Responsive Design", "Static Site", "Component Architecture", "HTML5", "Meta Tags", "Web Performance", "Accessibility", "Git", "GitHub", "Client Collaboration", "Project Management"],
     image: "/projects/expatlives.jpg",
+    images: [
+      "https://res.cloudinary.com/dtpz8iptk/image/upload/v1773163383/Screenshot_2026-03-10_224159_sipxkh.png",
+      "https://res.cloudinary.com/dtpz8iptk/image/upload/v1773163384/Screenshot_2026-03-10_224346_a0vhbs.png",
+      "https://res.cloudinary.com/dtpz8iptk/image/upload/v1773163386/Screenshot_2026-03-10_224458_n487yo.png",
+    ],
     color: "#3b82f6",
     year: "2025",
-    role: "Frontend Developer",
+    role: "Full Stack Developer",
     client: "Expatlives",
     result: "Mobile-first SEO-optimized multi-page site",
     link: "https://expatlives.vercel.app/",
@@ -68,11 +79,16 @@ export const projects: Project[] = [
       "Ongoing maintenance for an Australian university website — performance optimization, updates, and security.",
     longDescription:
       "Providing ongoing website maintenance for Ozford Institute of Higher Education, an Australian university. Responsibilities include performance optimization, content updates, security patching, bug fixes, uptime monitoring, and ensuring smooth operation of the university's digital presence. This long-term retainer engagement demonstrates my reliability for enterprise-level maintenance work.",
-    tech: ["WordPress", "PHP", "MySQL", "Performance Optimization", "SEO"],
+    tech: ["Python","Django","HTML5","CSS3","JavaScript","Tailwind CSS", "PHP", "MySQL", "Performance Optimization", "SEO", "Security", "Content Updates", "Uptime Monitoring", "Bug Fixes", "Client Communication", "Project Management"],
     image: "/projects/ozford.jpg",
+    images: [
+      "https://res.cloudinary.com/dtpz8iptk/image/upload/v1773163387/Screenshot_2026-03-10_224553_pqujaz.png",
+      "https://res.cloudinary.com/dtpz8iptk/image/upload/v1773163384/Screenshot_2026-03-10_224645_xefmco.png",
+      "https://res.cloudinary.com/dtpz8iptk/image/upload/v1773163384/Screenshot_2026-03-10_224820_jdij68.png",
+    ],
     color: "#8b5cf6",
     year: "2025",
-    role: "Website Maintenance",
+    role: "Full Stack Developer",
     client: "Ozford Institute of Higher Education",
     result: "Improved site speed & ongoing reliability",
     link: "https://www.ozford.edu.au/",
@@ -86,11 +102,16 @@ export const projects: Project[] = [
       "Awwwards-style personal portfolio with organic 3D blobs, smooth scroll, page transitions, and GSAP animations.",
     longDescription:
       "Designed and built my personal portfolio website as a showcase of modern web animation techniques. Features an organic 3D liquid blob using SVG gooey filters, GSAP-powered text reveals and scroll animations, Lenis smooth scrolling, Framer Motion page transitions, a custom cursor system, and a dark-themed Awwwards-inspired design.",
-    tech: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP", "Framer Motion"],
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP","E-Commerce", "Framer Motion", "Lenis", "SVG Gooey Filters", "Custom Cursor", "Dark Theme", "Awwwards-Inspired Design", "Performance Optimization", "SEO", "Responsive Design", "Git", "GitHub", "Personal Branding"],
     image: "/projects/portfolio.jpg",
+    images: [
+      "https://res.cloudinary.com/dtpz8iptk/image/upload/v1773163386/Screenshot_2026-03-10_224902_kwqub3.png",
+      "https://res.cloudinary.com/dtpz8iptk/image/upload/v1773163387/Screenshot_2026-03-10_225008_v7ts7x.png",
+      "https://res.cloudinary.com/dtpz8iptk/image/upload/v1773163383/Screenshot_2026-03-10_225117_lvh0ub.png",
+    ],
     color: "#a855f7",
     year: "2025",
-    role: "Full-Stack Developer",
+    role: "Full Stack Developer",
     client: "Personal",
     result: "Awwwards-quality animated portfolio",
     link: "https://www.rahulkumarsahu.in/",
@@ -312,18 +333,18 @@ export const socialLinks = [
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/in/rahulsahu",
-    label: "linkedin.com/in/rahulsahu",
+    href: "https://www.linkedin.com/in/ohkrahul/",
+    label: "linkedin.com/in/ohkrahul",
   },
   {
     name: "Github",
-    href: "https://github.com/rahulsahu",
-    label: "github.com/rahulsahu",
+    href: "https://github.com/ohkrahul",
+    label: "github.com/ohkrahul",
   },
   {
     name: "Email",
-    href: "mailto:rahulkumarsahu@gmail.com",
-    label: "rahulkumarsahu@gmail.com",
+    href: "mailto:rahulsahu3612@gmail.com",
+    label: "rahulsahu3612@gmail.com",
   },
 ];
 
