@@ -10,7 +10,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { socialLinks } from "@/lib/data";
@@ -18,10 +17,6 @@ import MagneticButton from "@/components/MagneticButton";
 import AnimatedText from "@/components/AnimatedText";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const SERVICE_ID  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID  as string;
-const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID as string;
-const PUBLIC_KEY  = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY  as string;
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -95,18 +90,18 @@ export default function Contact() {
     e.preventDefault();
     setStatus("loading");
     try {
-      await emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID,
-        {
-          from_name:    formData.name,
-          from_email:   formData.email,
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name:         formData.name,
+          email:        formData.email,
           project_type: formData.project || "Not specified",
           budget:       formData.budget  || "Not specified",
           message:      formData.message,
-        },
-        PUBLIC_KEY
-      );
+        }),
+      });
+      if (!res.ok) throw new Error("Send failed");
       setStatus("success");
       setFormData({ name: "", email: "", project: "", budget: "", message: "" });
     } catch {
@@ -258,7 +253,8 @@ export default function Contact() {
                   className="w-full bg-card border border-card-border rounded-xl px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors duration-300 appearance-none"
                 >
                   <option value="" className="bg-card">Select budget...</option>
-                  <option value="30k-50k" className="bg-card">₹30,000 - ₹50,000</option>
+                  <option value="10k-25k" className="bg-card">₹10,000 - ₹25,000</option>
+                  <option value="25k-50k" className="bg-card">₹25,000 - ₹50,000</option>
                   <option value="50k-1L" className="bg-card">₹50,000 - ₹1,00,000</option>
                   <option value="1L-2L" className="bg-card">₹1,00,000 - ₹2,00,000</option>
                   <option value="2L+" className="bg-card">₹2,00,000+</option>

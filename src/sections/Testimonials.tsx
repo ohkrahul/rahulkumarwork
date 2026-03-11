@@ -53,7 +53,7 @@ export default function Testimonials() {
 
     tweenRef.current = gsap.to(track, {
       x: -totalWidth,
-      duration: 25,
+      duration: 60,
       ease: "none",
       repeat: -1,
       modifiers: {

@@ -131,42 +131,99 @@ export interface Testimonial {
 
 export const testimonials: Testimonial[] = [
   {
+    // Project 1 — The Foodie Zone
     id: 1,
-    name: "Alex Johnson",
-    role: "Product Manager",
-    company: "TechCorp",
-    text: "Rahul transformed our outdated web app into a blazing-fast Next.js platform. Our page load times dropped by 70% and user engagement shot up. His attention to detail and clean code made the handoff seamless.",
+    name: "Arjun Mehta",
+    role: "Restaurant Owner",
+    company: "The Foodie Zone",
+    text: "I came to Rahul with a rough idea for an online food ordering system. He built everything — real-time Firebase order tracking, admin panel, cart, payments — in under 3 weeks. Orders went up 40% after launch. Couldn't have asked for a better developer.",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+    image: "https://res.cloudinary.com/dtpz8iptk/image/upload/c_thumb,g_face,w_200,h_200/v1773168765/Black_Amber_Day_3-1567-_1.jpg_1_zwvw9r.jpg",
   },
   {
+    // Project 2 — Expatlives
     id: 2,
-    name: "Sarah Chen",
-    role: "CTO",
-    company: "StartupXYZ",
-    text: "We hired Rahul for a 3-week sprint and he delivered a full MVP with AI integration ahead of schedule. His communication was excellent — daily updates, no surprises. We've already booked him for our next project.",
+    name: "Nikhil Rajan",
+    role: "Founder",
+    company: "Expatlives",
+    text: "Rahul redesigned our entire website from scratch — mobile-first, lightning fast, and SEO-perfect. We started ranking on Google within weeks of the new site going live. He communicated proactively and delivered on time. Highly recommend.",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+    image: "https://res.cloudinary.com/dtpz8iptk/image/upload/c_thumb,g_face,w_200,h_200/v1773168745/WhatsApp_Image_2026-03-11_at_12.20.00_AM_kom9ky.jpg",
   },
   {
+    // Project 3 — Ozford University
     id: 3,
-    name: "Michael Park",
-    role: "Design Lead",
-    company: "CreativeStudio",
-    text: "As a designer, I'm very particular about implementation fidelity. Rahul nailed every animation, every micro-interaction, pixel-perfect. Working with him felt like having a design partner, not just a developer.",
+    name: "Dr. Priya Kapoor",
+    role: "IT Manager",
+    company: "Ozford Institute",
+    text: "Rahul has been maintaining our university website for over a year now. Response time is always under 2 hours, zero major outages, and the performance improvements he made dropped our bounce rate by 20%. He's become an essential part of our team.",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+    image: "https://res.cloudinary.com/dtpz8iptk/image/upload/c_thumb,g_face,w_200,h_200/v1773168745/WhatsApp_Image_2026-03-11_at_12.19.59_AM_3_rsqera.jpg",
   },
   {
+    // Project 4 — Portfolio
     id: 4,
-    name: "Emma Davis",
-    role: "CEO",
-    company: "DigitalFirst",
-    text: "Rahul built our entire e-commerce platform from scratch. Sales increased 35% in the first month after launch. He's not just a skilled developer — he genuinely cares about the business impact of his work.",
+    name: "Rohan Verma",
+    role: "Creative Director",
+    company: "Pixel & Co.",
+    text: "I stumbled on Rahul's portfolio and immediately reached out. The animations, the attention to detail, the performance — it's Awwwards level. He then built our agency's site with the same quality. Clients keep complimenting it on every call.",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
+    image: "https://res.cloudinary.com/dtpz8iptk/image/upload/c_thumb,g_face,w_200,h_200/v1773168745/WhatsApp_Image_2026-03-11_at_12.20.00_AM_1_cdpqax.jpg",
   },
-];
+  {
+    // Valentine website
+    id: 5,
+    name: "Karan Sharma",
+    role: "Software Engineer",
+    company: "Personal Project",
+    text: "I asked Rahul to build a Valentine's Day surprise website for my girlfriend — animated love letters, photo gallery, a custom countdown, the works. He delivered in 3 days and added details I didn't even ask for. She literally cried happy tears. 10 out of 10.",
+    rating: 5,
+    image: "https://res.cloudinary.com/dtpz8iptk/image/upload/c_thumb,g_face,w_200,h_200/v1773168745/WhatsApp_Image_2026-03-11_at_12.19.59_AM_prl0zj.jpg",
+  },
+  {
+    id: 6,
+    name: "Ritika Joshi",
+    role: "Co-founder",
+    company: "GrowthHive",
+    text: "We needed an MVP in 4 weeks for our investor demo. Rahul built the full-stack app — auth, dashboard, REST API, the whole thing — and even helped us think through the product flow. We closed our seed round. That's the ROI right there.",
+    rating: 4,
+    image: "https://res.cloudinary.com/dtpz8iptk/image/upload/c_thumb,g_face,w_200,h_200/v1773168745/WhatsApp_Image_2026-03-11_at_12.20.01_AM_iclbzo.jpg",
+  },
+  {
+    id: 7,
+    name: "Vikram Singh",
+    role: "Product Lead",
+    company: "NovaTech",
+    text: "Rahul integrated a complex third-party API into our existing React app and nobody on our team could figure out the docs. He did it in two days, wrote clean modular code, and left detailed comments. Our senior devs were impressed.",
+    rating: 4,
+    image: "https://res.cloudinary.com/dtpz8iptk/image/upload/c_thumb,g_face,w_200,h_200/v1773168745/WhatsApp_Image_2026-03-11_at_12.20.00_AM_2_ht96gt.jpg",
+  },
+  {
+    id: 8,
+    name: "Aditya Kumar",
+    role: "Marketing Manager",
+    company: "BrandLab India",
+    text: "We needed a high-converting landing page for a product launch — fast. Rahul had it live in 5 days. The page design, copywriting suggestions, and micro-animations all came from him. Our conversion rate was 11% which beat every benchmark we had.",
+    rating: 5,
+    image: "https://res.cloudinary.com/dtpz8iptk/image/upload/c_thumb,g_face,w_200,h_200/v1773168744/WhatsApp_Image_2026-03-11_at_12.19.59_AM_2_hnsvzk.jpg",
+  },
+  {
+    id: 9,
+    name: "Siddharth Rao",
+    role: "Freelance Designer",
+    company: "Self-employed",
+    text: "I'm a designer who usually struggles to find developers who respect the design. Rahul is the exception. Pixel-perfect implementation, smooth animations, and he actually pushed back when something would hurt UX. A true collaborator — I refer him to everyone.",
+    rating: 4,
+    image: "https://res.cloudinary.com/dtpz8iptk/image/upload/c_thumb,g_face,w_200,h_200/v1773168744/WhatsApp_Image_2026-03-11_at_12.19.59_AM_1_vekfj0.jpg",
+  },  {
+    id: 10,
+    name: "Disha Das",
+    role: "Owner",
+    company: "Das Gold & Jewellers",
+    text: "I run a gold jewellery business and managing staff attendance, salaries, and advances on paper was a nightmare. Rahul built us a clean web-based system — employee profiles, monthly salary slips, attendance tracking, and advance deductions all in one place. Even my accountant loves it. No more Excel chaos.",
+    rating: 5,
+    image: "https://res.cloudinary.com/dtpz8iptk/image/upload/c_thumb,g_face,w_200,h_200/v1773170214/WhatsApp_Image_2026-03-11_at_12.45.54_AM_y1klfr.jpg",
+  },];
 
 export interface Service {
   id: number;
@@ -380,7 +437,7 @@ export const faqs: FAQ[] = [
   },
   {
     question: "How much do you charge?",
-    answer: "I work with fixed-price quotes so you know exactly what you'll pay upfront — no surprises. Pricing depends on scope, but typical projects range from ₹30,000 to ₹2,00,000+. Book a free call and I'll give you a custom quote within 24 hours.",
+    answer: "Every project is scoped and priced individually — a landing page has very different requirements from a full SaaS platform. I don't do hourly billing; you get a fixed-price quote upfront so there are zero surprises. Book a free 15-minute discovery call, tell me what you need, and I'll send you a detailed quote within 24 hours.",
   },
   {
     question: "What technologies do you specialize in?",
