@@ -13,7 +13,6 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { socialLinks } from "@/lib/data";
-import MagneticButton from "@/components/MagneticButton";
 import AnimatedText from "@/components/AnimatedText";
 
 gsap.registerPlugin(ScrollTrigger);
