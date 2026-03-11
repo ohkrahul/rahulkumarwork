@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-function buildHtml(name: string, email: string, projectType: string, budget: string, message: string) {
+function buildHtml(name: string, email: string, phone: string, projectType: string, budget: string, message: string) {
   return `<!doctype html>
 <html>
 <head>
@@ -50,6 +50,7 @@ function buildHtml(name: string, email: string, projectType: string, budget: str
                     <div style="color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">From</div>
                     <div style="color:#111827;font-size:16px;font-weight:600;">${name}</div>
                     <div style="margin-top:2px;"><a href="mailto:${email}" style="color:#4f46e5;font-size:14px;text-decoration:none;">${email}</a></div>
+                    ${phone && phone !== 'Not provided' ? `<div style="margin-top:2px;"><a href="tel:${phone}" style="color:#374151;font-size:14px;text-decoration:none;">📞 ${phone}</a></div>` : ''}
                   </td>
                 </tr>
                 <tr>
@@ -106,7 +107,7 @@ function buildHtml(name: string, email: string, projectType: string, budget: str
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, project_type, budget, message } = await req.json();
+    const { name, email, phone, project_type, budget, message } = await req.json();
 
     if (!name || !email || !message) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -117,7 +118,7 @@ export async function POST(req: NextRequest) {
       to: process.env.ADMIN_EMAIL,
       replyTo: email,
       subject: `🚀 New enquiry from ${name} — ${project_type || "Portfolio"}`,
-      html: buildHtml(name, email, project_type, budget, message),
+      html: buildHtml(name, email, phone, project_type, budget, message),
     });
 
     return NextResponse.json({ success: true });

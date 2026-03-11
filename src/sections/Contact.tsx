@@ -23,6 +23,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     project: "",
     budget: "",
     message: "",
@@ -96,6 +97,7 @@ export default function Contact() {
         body: JSON.stringify({
           name:         formData.name,
           email:        formData.email,
+          phone:        formData.phone  || "Not provided",
           project_type: formData.project || "Not specified",
           budget:       formData.budget  || "Not specified",
           message:      formData.message,
@@ -103,7 +105,7 @@ export default function Contact() {
       });
       if (!res.ok) throw new Error("Send failed");
       setStatus("success");
-      setFormData({ name: "", email: "", project: "", budget: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", project: "", budget: "", message: "" });
     } catch {
       setStatus("error");
     }
@@ -223,6 +225,20 @@ export default function Contact() {
               </div>
             </div>
 
+            {/* Phone number */}
+            <div className="contact-field">
+              <label className="text-xs text-muted uppercase tracking-wider mb-2 block">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                className="w-full bg-card border border-card-border rounded-xl px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors duration-300 placeholder:text-muted/50"
+                placeholder="+91 98765 43210"
+              />
+            </div>
+
             {/* Project type & Budget row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="contact-field">
@@ -295,15 +311,13 @@ export default function Contact() {
 
             {/* Submit button */}
             <div className="contact-field">
-              <MagneticButton
+              <button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full sm:w-auto px-10 py-4 rounded-xl bg-primary text-white font-bold text-sm uppercase tracking-wider hover:bg-primary-dark transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-10 py-4 rounded-xl bg-primary text-white font-bold text-sm uppercase tracking-wider hover:bg-primary-dark transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span className="relative z-10">
-                  {status === "loading" ? "Sending..." : "Send & Get Free Quote"}
-                </span>
-              </MagneticButton>
+                {status === "loading" ? "Sending..." : "Send & Get Free Quote"}
+              </button>
               <p className="text-xs text-muted mt-3">
                 🔒 Your info is never shared. I&apos;ll reply within 24 hours.
               </p>
