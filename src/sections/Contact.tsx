@@ -255,6 +255,7 @@ export default function Contact() {
                   <option value="ecommerce" className="bg-card">E-Commerce</option>
                   <option value="redesign" className="bg-card">Redesign / Rebuild</option>
                   <option value="ai" className="bg-card">AI Integration</option>
+                  <option value="digital-marketing" className="bg-card">Digital Marketing / SEO</option>
                   <option value="other" className="bg-card">Other</option>
                 </select>
               </div>
