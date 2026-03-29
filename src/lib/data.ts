@@ -189,17 +189,9 @@ export const testimonials: Testimonial[] = [
     rating: 4,
     image: "https://res.cloudinary.com/dtpz8iptk/image/upload/c_thumb,g_face,w_200,h_200/v1773168745/WhatsApp_Image_2026-03-11_at_12.20.01_AM_iclbzo.jpg",
   },
+  
   {
     id: 7,
-    name: "Vikram Singh",
-    role: "Product Lead",
-    company: "NovaTech",
-    text: "Rahul integrated a complex third-party API into our existing React app and nobody on our team could figure out the docs. He did it in two days, wrote clean modular code, and left detailed comments. Our senior devs were impressed.",
-    rating: 4,
-    image: "https://res.cloudinary.com/dtpz8iptk/image/upload/c_thumb,g_face,w_200,h_200/v1773168745/WhatsApp_Image_2026-03-11_at_12.20.00_AM_2_ht96gt.jpg",
-  },
-  {
-    id: 8,
     name: "Aditya Kumar",
     role: "Marketing Manager",
     company: "BrandLab India",
@@ -208,7 +200,7 @@ export const testimonials: Testimonial[] = [
     image: "https://res.cloudinary.com/dtpz8iptk/image/upload/c_thumb,g_face,w_200,h_200/v1773168744/WhatsApp_Image_2026-03-11_at_12.19.59_AM_2_hnsvzk.jpg",
   },
   {
-    id: 9,
+    id: 8,
     name: "Siddharth Rao",
     role: "Freelance Designer",
     company: "Self-employed",
@@ -216,7 +208,7 @@ export const testimonials: Testimonial[] = [
     rating: 4,
     image: "https://res.cloudinary.com/dtpz8iptk/image/upload/c_thumb,g_face,w_200,h_200/v1773168744/WhatsApp_Image_2026-03-11_at_12.19.59_AM_1_vekfj0.jpg",
   },  {
-    id: 10,
+    id: 9,
     name: "Disha Das",
     role: "Owner",
     company: "Das Gold & Jewellers",
